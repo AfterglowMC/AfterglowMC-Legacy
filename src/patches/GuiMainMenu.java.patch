@@ -1,0 +1,126 @@
+--- a/net/minecraft/src/GuiMainMenu.java
++++ b/net/minecraft/src/GuiMainMenu.java
+@@ -4,24 +4,39 @@
+ import java.util.Date;
+ import java.util.Random;
+ 
++import java.io.BufferedReader;
++import java.io.InputStreamReader;
++import java.util.ArrayList;
++
+ import org.lwjgl.opengl.GL11;
+ import org.lwjgl.util.glu.GLU;
+ 
+ public class GuiMainMenu extends GuiScreen {
+ 	private static final Random rand = new Random();
+-	String[] logoBlockLayers = new String[]{" *   * * *   * *** *** *** *** *** ***", " ** ** * **  * *   *   * * * * *    * ", " * * * * * * * **  *   **  *** **   * ", " *   * * *  ** *   *   * * * * *    * ", " *   * * *   * *** *** * * * * *    * "};
++	String[] logoBlockLayers = new String[]{" *** *** *** *** *** *** *   *** *   * ", " * * *    *  *   * * *   *   * * *   * ", " *** **   *  **  **  * * *   * * * * * ", " * * *    *  *   * * * * *   * * ** ** ", " * * *    *  *** * * *** *** *** *   * "};
+ 	private LogoEffectRandomizer[][] logoEffects;
+ 	private float updateCounter = 0.0F;
+ 	private String splashString = "missingno";
+-	private String[] splashes = new String[]{"MINECRAFT DEMO", "(Stay tuned for more)"};
+ 	public static boolean shw = false;
++	public int worldInt = net.minecraft.src.GuiSelectWorld.worldInt;
++	public int latest = net.minecraft.src.GuiSelectWorld.latest;
+ 
+ 	public GuiMainMenu() {
+ 		try {
+-			this.splashString = this.splashes[rand.nextInt(this.splashes.length)];
+-		} catch (Exception exception2) {
++			ArrayList arrayList1 = new ArrayList();
++			BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(GuiMainMenu.class.getResourceAsStream("/title/splashes.txt")));
++			String string3 = "";
++
++			while((string3 = bufferedReader2.readLine()) != null) {
++				string3 = string3.trim();
++				if(string3.length() > 0) {
++					arrayList1.add(string3);
++				}
++			}
++
++			this.splashString = (String)arrayList1.get(rand.nextInt(arrayList1.size()));
++		} catch (Exception exception4) {
+ 		}
+-
+ 	}
+ 
+ 	public void updateScreen() {
+@@ -40,6 +55,7 @@
+ 	}
+ 
+ 	public void initGui() {
++		this.worldInt = net.minecraft.src.GuiSelectWorld.worldInt;
+ 		Calendar calendar1 = Calendar.getInstance();
+ 		calendar1.setTime(new Date());
+ 		if(calendar1.get(2) + 1 == 11 && calendar1.get(5) == 9) {
+@@ -53,9 +69,13 @@
+ 		}
+ 
+ 		this.controlList.clear();
+-		this.controlList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 48, "Singleplayer"));
+-		this.controlList.add(new GuiButton(2, this.width / 2 - 100, this.height / 4 + 72, "Multiplayer"));
+-		this.controlList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120 + 12, "Options..."));
++		this.controlList.add(new GuiSmallButton2(1, this.width / 2 - 100, this.height / 4 + 48, "Singleplayer"));
++		this.controlList.add(new GuiSmallButton2(6, this.width / 2 - 0, this.height / 4 + 48, "Preloads"));
++		this.controlList.add(new GuiSmallButton2(3, this.width / 2 - 100, this.height / 4 + 72, "Quickplay " + "<" + worldInt + ">"));
++		this.controlList.add(new GuiSmallButton2(4, this.width / 2 - 0, this.height / 4 + 72, "Load Last " + "<" + latest + ">"));
++		this.controlList.add(new GuiButton(2, this.width / 2 - 100, this.height / 4 + 98, "Multiplayer"));
++		this.controlList.add(new GuiSmallButton2(0, this.width / 2 - 100, this.height / 4 + 120 + 12, "Options"));
++		this.controlList.add(new GuiSmallButton2(5, this.width / 2 - 0, this.height / 4 + 120 + 12, "Credits"));
+ 		if(this.mc.session == null) {
+ 			((GuiButton)this.controlList.get(1)).e = false;
+ 		}
+@@ -75,6 +95,26 @@
+ 			this.mc.displayGuiScreen(new GuiMultiplayer(this));
+ 		}
+ 
++		if(button.yPosition == 3) {
++			this.mc.playerController = new PlayerControllerSP(this.mc);
++			this.mc.startWorld("World" + worldInt);
++			this.mc.displayGuiScreen((GuiScreen)null);
++		}
++
++		if(button.yPosition == 4) {
++			this.mc.playerController = new PlayerControllerSP(this.mc);
++			this.mc.startWorld("World" + latest);
++			this.mc.displayGuiScreen((GuiScreen)null);
++		}
++
++		if(button.yPosition == 5) {
++			this.mc.displayGuiScreen(new GuiCredits(this));
++		}
++
++		if(button.yPosition == 6) {
++			this.mc.displayGuiScreen(new GuiPreloads(this));
++		}
++
+ 	}
+ 
+ 	public void drawScreen(int mouseX, int mouseY, float renderPartialTick) {
+@@ -87,7 +127,7 @@
+ 		GL11.glPushMatrix();
+ 		GL11.glTranslatef((float)(this.width / 2 + 90), 70.0F, 0.0F);
+ 		GL11.glRotatef(-20.0F, 0.0F, 0.0F, 1.0F);
+-		float f5 = (1.8F - MathHelper.abs(MathHelper.sin((float)(System.currentTimeMillis() % 1000L) / 1000.0F * (float)Math.PI * 2.0F) * 0.1F)) * 100.0F / (float)(this.fontRenderer.getStringWidth(this.splashString) + 32);
++		float f5 = (1.5F - MathHelper.abs(MathHelper.sin((float)(System.currentTimeMillis() % 1000L) / 1000.0F * (float)Math.PI * 2.0F) * 0.1F)) * 100.0F / (float)(this.fontRenderer.getStringWidth(this.splashString) + 32);
+ 		GL11.glScalef(f5, f5, f5);
+ 		this.drawCenteredString(this.fontRenderer, this.splashString, 0, -8, 16776960);
+ 		GL11.glPopMatrix();
+@@ -156,7 +196,7 @@
+ 
+ 			GL11.glScalef(1.0F, -1.0F, 1.0F);
+ 			GL11.glRotatef(15.0F, 1.0F, 0.0F, 0.0F);
+-			GL11.glScalef(0.89F, 1.0F, 0.4F);
++			GL11.glScalef(1F, 0.95F, 0.4F);
+ 			GL11.glTranslatef((float)(-this.logoBlockLayers[0].length()) * 0.5F, (float)(-this.logoBlockLayers.length) * 0.5F, 0.0F);
+ 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/terrain.png"));
+ 			if(i3 == 0) {
+@@ -182,7 +222,7 @@
+ 						GL11.glTranslatef((float)i6, (float)i5, f8);
+ 						GL11.glScalef(f9, f9, f9);
+ 						GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
+-						renderBlocks4.renderBlockAsItem(Block.stone, f10);
++						renderBlocks4.renderBlockAsItem(Block.TileBlock3, f10);
+ 						GL11.glPopMatrix();
+ 					}
+ 				}

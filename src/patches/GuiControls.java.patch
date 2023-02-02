@@ -1,0 +1,31 @@
+--- a/net/minecraft/src/GuiControls.java
++++ b/net/minecraft/src/GuiControls.java
+@@ -17,7 +17,7 @@
+ 		}
+ 
+ 		this.controlList.add(new GuiButton(201, this.width / 2 - 100, this.height / 6 + 140, "Gamepad sensitivity: " + InputHandler.lookSens));
+-		this.controlList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, "Done"));
++		this.controlList.add(new GuiSmallerButton(200, this.width / 2 - 155, this.height / 6 + (-25), "Done"));
+ 	}
+ 
+ 	protected void actionPerformed(GuiButton button) {
+@@ -25,6 +25,10 @@
+ 			((GuiButton)this.controlList.get(i2)).c = this.options.getKeyBindingDescription(i2);
+ 		}
+ 
++		if(button.yPosition == 100) {
++			this.mc.displayGuiScreen(this.parentScreen);
++		}
++
+ 		if(button.yPosition == 200) {
+ 			this.mc.displayGuiScreen(this.parentScreen);
+ 		} else if(button.yPosition == 201) {
+@@ -53,7 +57,7 @@
+ 	}
+ 
+ 	public void drawScreen(int mouseX, int mouseY, float renderPartialTick) {
+-		this.drawDefaultBackground();
++		this.drawOptionBackground();
+ 		this.drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 20, 0xFFFFFF);
+ 		super.drawScreen(mouseX, mouseY, renderPartialTick);
+ 	}

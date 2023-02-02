@@ -1,0 +1,10 @@
+--- a/net/minecraft/src/ItemPickaxe.java
++++ b/net/minecraft/src/ItemPickaxe.java
+@@ -10,6 +10,6 @@
+ 	}
+ 
+ 	public boolean canHarvestBlock(Block block) {
+-		return block == Block.obsidian ? this.aX == 3 : (block != Block.blockDiamond && block != Block.oreDiamond ? (block != Block.blockGold && block != Block.oreGold ? (block != Block.blockSteel && block != Block.oreIron ? (block != Block.oreRedstone && block != Block.oreRedstoneGlowing ? (block.material == Material.rock ? true : block.material == Material.iron) : this.aX >= 2) : this.aX >= 1) : this.aX >= 2) : this.aX >= 2);
++		return block == Block.obsidian ? this.aX == 4 : (block != Block.blockDiamond && block != Block.oreDiamond ? (block != Block.blockGold && block != Block.oreGold ? (block != Block.blockSteel && block != Block.oreIron ? (block != Block.oreRedstone && block != Block.oreRedstoneGlowing ? (block.material == Material.rock ? true : block.material == Material.iron) : this.aX >= 2) : this.aX >= 1) : this.aX >= 2) : this.aX >= 2);
+ 	}
+ }

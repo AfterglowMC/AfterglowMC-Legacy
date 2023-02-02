@@ -1,0 +1,44 @@
+--- a/net/minecraft/src/EntityChicken.java
++++ b/net/minecraft/src/EntityChicken.java
+@@ -2,6 +2,7 @@
+ 
+ import java.io.DataInputStream;
+ import java.io.DataOutputStream;
++import java.io.IOException;
+ 
+ public class EntityChicken extends Packet {
+ 	public int a;
+@@ -15,7 +16,7 @@
+ 		this.isChunkDataPacket = true;
+ 	}
+ 
+-	public void readPacketData(DataInputStream dataInputStream) {
++	public void readPacketData(DataInputStream dataInputStream) throws IOException {
+ 		this.a = dataInputStream.readInt();
+ 		this.b = dataInputStream.readInt();
+ 		this.f = dataInputStream.readShort() & 65535;
+@@ -23,7 +24,7 @@
+ 		this.d = new byte[this.f];
+ 		this.e = new byte[this.f];
+ 
+-		for(int i2 = 0; i2 < this.f; ++i2) {
++		for (int i2 = 0; i2 < this.f; ++i2) {
+ 			this.c[i2] = dataInputStream.readShort();
+ 		}
+ 
+@@ -31,12 +32,12 @@
+ 		dataInputStream.readFully(this.e);
+ 	}
+ 
+-	public void writePacket(DataOutputStream dataOutputStream) {
++	public void writePacket(DataOutputStream dataOutputStream) throws IOException {
+ 		dataOutputStream.writeInt(this.a);
+ 		dataOutputStream.writeInt(this.b);
+-		dataOutputStream.writeShort((short)this.f);
++		dataOutputStream.writeShort((short) this.f);
+ 
+-		for(int i2 = 0; i2 < this.f; ++i2) {
++		for (int i2 = 0; i2 < this.f; ++i2) {
+ 			dataOutputStream.writeShort(this.c[i2]);
+ 		}
+ 

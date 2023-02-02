@@ -1,0 +1,63 @@
+--- a/net/minecraft/src/GameSettings.java
++++ b/net/minecraft/src/GameSettings.java
+@@ -16,6 +16,7 @@
+ 	public boolean a = true;
+ 	public boolean b = true;
+ 	public boolean c = false;
++	public static boolean cheats = true;
+ 	public boolean invertMouse = false;
+ 	public int renderDistance = 0;
+ 	public boolean viewBobbing = true;
+@@ -27,14 +28,14 @@
+ 	public KeyBinding keyBindBack = new KeyBinding("Back", Keyboard.KEY_S);
+ 	public KeyBinding keyBindRight = new KeyBinding("Right", Keyboard.KEY_D);
+ 	public KeyBinding keyBindJump = new KeyBinding("Jump", Keyboard.KEY_SPACE);
+-	public KeyBinding keyBindInventory = new KeyBinding("Inventory", Keyboard.KEY_I);
++	public KeyBinding keyBindInventory = new KeyBinding("Inventory", Keyboard.KEY_E);
+ 	public KeyBinding keyBindDrop = new KeyBinding("Drop", Keyboard.KEY_Q);
+ 	public KeyBinding keyBindChat = new KeyBinding("Chat", Keyboard.KEY_T);
+ 	public KeyBinding keyBindToggleFog = new KeyBinding("Toggle fog", Keyboard.KEY_F);
+ 	public KeyBinding[] s = new KeyBinding[]{this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindToggleFog};
+ 	protected Minecraft t;
+ 	private File z;
+-	public int u = 10;
++	public int u = 11;
+ 	public int numberOfOptions = 2;
+ 	public boolean w = false;
+ 
+@@ -101,11 +102,15 @@
+ 			this.t.renderGlobal.loadRenderers();
+ 		}
+ 
++		if(i1 == 10) {
++			this.cheats = !this.cheats;
++		}
++
+ 		this.saveOptions();
+ 	}
+ 
+ 	public String b(int i1) {
+-		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 3 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 4 ? "Render distance: " + x[this.renderDistance] : (i1 == 5 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 6 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 7 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 8 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 9 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : "")))))))));
++		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 3 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 4 ? "Render distance: " + x[this.renderDistance] : (i1 == 5 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 6 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 7 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 8 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 9 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : (i1 == 10 ? "Cheats: " + (this.cheats ? "ON" : "OFF") : ""))))))))));
+ 	}
+ 
+ 	public void loadOptions() {
+@@ -155,6 +160,10 @@
+ 						this.limitFramerate = string3[1].equals("true");
+ 					}
+ 
++					if(string3[0].equals("cheats")) {
++						this.cheats = string3[1].equals("false");
++					}
++
+ 					if(string3[0].equals("a1605ext_difficulty")) {
+ 						this.numberOfOptions = Integer.parseInt(string3[1]);
+ 					}
+@@ -196,6 +205,7 @@
+ 			printWriter1.println("# Settings below are specific to 1605 extension.");
+ 			printWriter1.println("a1605ext_difficulty:" + this.numberOfOptions);
+ 			printWriter1.println("a1605ext_gamepadSens:" + InputHandler.lookSens);
++			printWriter1.println("cheats:" + this.cheats);
+ 
+ 			for(int i2 = 0; i2 < this.s.length; ++i2) {
+ 				printWriter1.println("key_" + this.s[i2].keyDescription + ":" + this.s[i2].keyCode);
