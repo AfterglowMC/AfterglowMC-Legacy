@@ -1,0 +1,82 @@
+--- a/net/minecraft/src/GuiSelectWorld.java
++++ b/net/minecraft/src/GuiSelectWorld.java
+@@ -6,8 +6,12 @@
+ 
+ public class GuiSelectWorld extends GuiScreen {
+ 	protected GuiScreen parentScreen;
++	public boolean a = true;
+ 	protected String screenTitle = "Select world";
+ 	private boolean selected = false;
++	static public int worldInt = 1;
++	static public int latest = 1;
++	int counter = 9;
+ 
+ 	public GuiSelectWorld(GuiScreen guiScreen1) {
+ 		this.parentScreen = guiScreen1;
+@@ -19,12 +23,17 @@
+ 		for(int i2 = 0; i2 < 5; ++i2) {
+ 			NBTTagCompound nBTTagCompound3 = World.getLevelData(file1, "World" + (i2 + 1));
+ 			if(nBTTagCompound3 == null) {
+-				this.controlList.add(new GuiButton(i2, this.width / 2 - 100, this.height / 6 + 24 * i2, "- empty -"));
++				this.controlList.add(new GuiButton(i2, this.width / 2 - 115, this.height / 6 + 24 * i2, "- empty -"));
++				++counter;
++				this.controlList.add(new GuiSmallestButton(counter, this.width / 2 -(-90), this.height / 6 + 24 * i2, "Set"));
+ 			} else {
+ 				String string4 = "World " + (i2 + 1);
+ 				long j5 = nBTTagCompound3.getLong("SizeOnDisk");
+ 				string4 = string4 + " (" + (float)(j5 / 1024L * 100L / 1024L) / 100.0F + " MB)";
+-				this.controlList.add(new GuiButton(i2, this.width / 2 - 100, this.height / 6 + 24 * i2, string4));
++				this.controlList.add(new GuiButton(i2, this.width / 2 - 115, this.height / 6 + 24 * i2, string4));
++				++counter;
++				this.controlList.add(new GuiSmallestButton(counter, this.width / 2 -(-90), this.height / 6 + 24 * i2, "Set"));
++
+ 			}
+ 		}
+ 
+@@ -50,7 +59,26 @@
+ 			} else if(button.yPosition == 6) {
+ 				this.mc.displayGuiScreen(this.parentScreen);
+ 			}
+-
++		}
++
++		if(button.yPosition == 10) {
++			this.worldInt = 1;
++		}
++
++		if(button.yPosition == 11) {
++			this.worldInt = 2;
++		}
++
++		if(button.yPosition == 12) {
++			this.worldInt = 3;
++		}
++
++		if(button.yPosition == 13) {
++			this.worldInt = 4;
++		}
++
++		if(button.yPosition == 14) {
++			this.worldInt = 5;
+ 		}
+ 	}
+ 
+@@ -58,9 +86,15 @@
+ 		this.mc.displayGuiScreen((GuiScreen)null);
+ 		if(!this.selected) {
+ 			this.selected = true;
+-			this.mc.playerController = new PlayerControllerSP(this.mc);
+-			this.mc.startWorld("World" + i1);
+-			this.mc.displayGuiScreen((GuiScreen)null);
++			if (i1 == 3) {
++				this.mc.displayGuiScreen(new GuiWorld3Warning(this));
++			} else {
++				this.mc.playerController = new PlayerControllerSP(this.mc);
++				this.mc.startWorld("World" + i1);
++				this.latest = i1;
++				this.mc.displayGuiScreen((GuiScreen)null);
++			}
++
+ 		}
+ 	}
+ 

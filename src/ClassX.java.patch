@@ -1,0 +1,11 @@
+--- a/net/minecraft/src/ClassX.java
++++ b/net/minecraft/src/ClassX.java
+@@ -72,7 +72,7 @@
+ 		}
+ 	}
+ 
+-	public static void a(NBTTagCompound nBTTagCompound0, DataOutput dataOutput1) {
++	public static void a(NBTTagCompound nBTTagCompound0, DataOutput dataOutput1) throws IOException {
+ 		NBTBase.writeNamedTag(nBTTagCompound0, dataOutput1);
+ 	}
+ }
