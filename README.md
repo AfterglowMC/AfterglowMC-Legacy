@@ -3,7 +3,8 @@
 Afterglow is a lilypad client created to serve a better experience with QoL features and an improved survival experience, including many more extras.
 
 # CONTRIBUTION GUIDE
-Every file required to contribute to the project is found under the src folder, these are patch files you can use. Patch files contain every file modified.
+Every file required to contribute to the project is found under the src folder, there are patch files you can use. Patch files contain every file modified.
+You can also see the files ive specifically created for the project because mojang are strict with their "no sharing source code" policy 
 
 # KNOWN PROBLEMS
 - random crashing upon attempting to load a world via quickplay
