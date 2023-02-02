@@ -8,7 +8,8 @@ Every file required to contribute to the project is found under the src folder, 
 # KNOWN PROBLEMS
 - random crashing upon attempting to load a world via quickplay
 - the cheat menu disabler doesnt actually work (weird problem with inputHandler)
-- quickplay worlds dont save after closing (due to issues im having with getting them saved and allocated somewhere)
+- quickplay worlds dont save after closing (FIXED)
 - upon exiting the world3 warning screen, the next button pressed no matter what will lead you back to the main menu instead of continuing as it should.
+- sound straight up doesnt work
 
 ## THESE PROBLEMS SHOULD BE FIXED UPON THE NEXT RELEASE!
