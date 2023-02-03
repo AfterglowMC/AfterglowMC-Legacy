@@ -1,3 +1,4 @@
 Loading screen art - Mariood
+Fixed audio system - buj
  
-this is a file dedicated to crediting my sources, i will try to not steal code as much as possible though since i want this to be a project made from my own labour
+this is a file dedicated to crediting people, i will try to not steal code as much as possible though since i want this to be a project made from my own labour
