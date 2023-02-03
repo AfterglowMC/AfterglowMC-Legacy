@@ -1,14 +1,18 @@
 --- a/net/minecraft/src/GameSettings.java
 +++ b/net/minecraft/src/GameSettings.java
-@@ -16,6 +16,7 @@
+@@ -16,8 +16,11 @@
  	public boolean a = true;
  	public boolean b = true;
  	public boolean c = false;
 +	public static boolean cheats = true;
++	public static boolean k = false;
  	public boolean invertMouse = false;
  	public int renderDistance = 0;
++	static public int worldInt = net.minecraft.src.GuiSelectWorld.worldInt;
  	public boolean viewBobbing = true;
-@@ -27,14 +28,14 @@
+ 	public boolean anaglyph = false;
+ 	public boolean limitFramerate = false;
+@@ -27,14 +30,14 @@
  	public KeyBinding keyBindBack = new KeyBinding("Back", Keyboard.KEY_S);
  	public KeyBinding keyBindRight = new KeyBinding("Right", Keyboard.KEY_D);
  	public KeyBinding keyBindJump = new KeyBinding("Jump", Keyboard.KEY_SPACE);
@@ -25,12 +29,12 @@
  	public int numberOfOptions = 2;
  	public boolean w = false;
  
-@@ -101,11 +102,15 @@
+@@ -101,14 +104,19 @@
  			this.t.renderGlobal.loadRenderers();
  		}
  
 +		if(i1 == 10) {
-+			this.cheats = !this.cheats;
++			//nothing
 +		}
 +
  		this.saveOptions();
@@ -38,11 +42,15 @@
  
  	public String b(int i1) {
 -		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 3 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 4 ? "Render distance: " + x[this.renderDistance] : (i1 == 5 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 6 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 7 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 8 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 9 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : "")))))))));
-+		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 3 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 4 ? "Render distance: " + x[this.renderDistance] : (i1 == 5 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 6 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 7 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 8 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 9 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : (i1 == 10 ? "Cheats: " + (this.cheats ? "ON" : "OFF") : ""))))))))));
++		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 3 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 4 ? "Render distance: " + x[this.renderDistance] : (i1 == 5 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 6 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 7 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 8 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 9 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : (i1 == 10 ? "Update Quickplay" + (this.k ? "" : "") : ""))))))))));
  	}
  
  	public void loadOptions() {
-@@ -155,6 +160,10 @@
++		this.worldInt = net.minecraft.src.GuiSelectWorld.worldInt;
+ 		try {
+ 			if(this.z.exists()) {
+ 				BufferedReader bufferedReader1 = new BufferedReader(new FileReader(this.z));
+@@ -155,6 +163,10 @@
  						this.limitFramerate = string3[1].equals("true");
  					}
  
@@ -53,10 +61,30 @@
  					if(string3[0].equals("a1605ext_difficulty")) {
  						this.numberOfOptions = Integer.parseInt(string3[1]);
  					}
-@@ -196,6 +205,7 @@
+@@ -163,6 +175,10 @@
+ 						InputHandler.lookSens = Integer.parseInt(string3[1]);
+ 					}
+ 
++					if(string3[0].equals("quickplaySet")) {
++						this.worldInt = Integer.parseInt(string3[1]);
++					}
++
+ 					if(string3[0].equals("fancyGraphics")) {
+ 						this.fancyGraphics = string3[1].equals("true");
+ 					}
+@@ -181,6 +197,7 @@
+ 	}
+ 
+ 	public void saveOptions() {
++		//this.worldInt = net.minecraft.src.GuiSelectWorld.worldInt;
+ 		try {
+ 			PrintWriter printWriter1 = new PrintWriter(new FileWriter(this.z));
+ 			printWriter1.println("music:" + this.a);
+@@ -196,6 +213,8 @@
  			printWriter1.println("# Settings below are specific to 1605 extension.");
  			printWriter1.println("a1605ext_difficulty:" + this.numberOfOptions);
  			printWriter1.println("a1605ext_gamepadSens:" + InputHandler.lookSens);
++			printWriter1.println("quickplaySet:" + this.worldInt);
 +			printWriter1.println("cheats:" + this.cheats);
  
  			for(int i2 = 0; i2 < this.s.length; ++i2) {

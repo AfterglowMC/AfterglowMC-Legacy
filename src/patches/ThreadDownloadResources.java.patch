@@ -1,0 +1,99 @@
+--- a/net/minecraft/src/ThreadDownloadResources.java
++++ b/net/minecraft/src/ThreadDownloadResources.java
+@@ -34,38 +34,8 @@
+ 	}
+ 
+ 	void deleteDirectoryWalkTree(java.nio.file.Path path1) throws IOException {
+-		SimpleFileVisitor simpleFileVisitor2 = new SimpleFileVisitor() {
+-			public FileVisitResult visitFile(java.nio.file.Path path1, BasicFileAttributes basicFileAttributes2) throws IOException {
+-				Files.delete(path1);
+-				return FileVisitResult.CONTINUE;
+-			}
+-
+-			public FileVisitResult visitFileFailed(java.nio.file.Path path1, IOException iOException2) throws IOException {
+-				Files.delete(path1);
+-				return FileVisitResult.CONTINUE;
+-			}
+-
+-			public FileVisitResult postVisitDirectory(java.nio.file.Path path1, IOException iOException2) throws IOException {
+-				if(iOException2 != null) {
+-					throw iOException2;
+-				} else {
+-					Files.delete(path1);
+-					return FileVisitResult.CONTINUE;
+-				}
+-			}
+-
+-			public FileVisitResult postVisitDirectory(Object object1, IOException iOException2) throws IOException {
+-				return this.postVisitDirectory((java.nio.file.Path)object1, iOException2);
+-			}
+-
+-			public FileVisitResult visitFileFailed(Object object1, IOException iOException2) throws IOException {
+-				return this.visitFileFailed((java.nio.file.Path)object1, iOException2);
+-			}
+-
+-			public FileVisitResult visitFile(Object object1, BasicFileAttributes basicFileAttributes2) throws IOException {
+-				return this.visitFile((java.nio.file.Path)object1, basicFileAttributes2);
+-			}
+-		};
++		SimpleFileVisitor simpleFileVisitor2 = new FileVisitor();
++		
+ 		Files.walkFileTree(path1, simpleFileVisitor2);
+ 	}
+ 
+@@ -105,6 +75,16 @@
+ 				bufferedReader4 = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/wstatic_data.txt")));
+ 				this.UnpackReader(bufferedReader4);
+ 			}
++			System.out.println(System.getProperty("user.dir") + "/saves/Hub/");
++			if(!(new File(System.getProperty("user.dir") + "/saves/Hub/")).exists()) {
++				bufferedReader4 = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/wstatic_data.txt")));
++				this.UnpackReader(bufferedReader4);
++			}
++			System.out.println(System.getProperty("user.dir") + "/saves/SecretWorld/");
++			if(!(new File(System.getProperty("user.dir") + "/saves/SecretWorld/")).exists()) {
++				bufferedReader4 = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/wstatic_data.txt")));
++				this.UnpackReader(bufferedReader4);
++			}
+ 
+ 			this.loadResource(this.resourcesFolder, "");
+ 		} catch (Exception exception6) {
+@@ -169,5 +149,38 @@
+ 	}
+ 
+ 	private void downloadResource(URL url, File file, long size) throws IOException {
++	}
++
++	static class FileVisitor extends SimpleFileVisitor {
++		public FileVisitResult visitFile(java.nio.file.Path path1, BasicFileAttributes basicFileAttributes2) throws IOException {
++			Files.delete(path1);
++			return FileVisitResult.CONTINUE;
++		}
++
++		public FileVisitResult visitFileFailed(java.nio.file.Path path1, IOException iOException2) throws IOException {
++			Files.delete(path1);
++			return FileVisitResult.CONTINUE;
++		}
++
++		public FileVisitResult postVisitDirectory(java.nio.file.Path path1, IOException iOException2) throws IOException {
++			if(iOException2 != null) {
++				throw iOException2;
++			} else {
++				Files.delete(path1);
++				return FileVisitResult.CONTINUE;
++			}
++		}
++
++		public FileVisitResult postVisitDirectory(Object object1, IOException iOException2) throws IOException {
++			return this.postVisitDirectory((java.nio.file.Path)object1, iOException2);
++		}
++
++		public FileVisitResult visitFileFailed(Object object1, IOException iOException2) throws IOException {
++			return this.visitFileFailed((java.nio.file.Path)object1, iOException2);
++		}
++
++		public FileVisitResult visitFile(Object object1, BasicFileAttributes basicFileAttributes2) throws IOException {
++			return this.visitFile((java.nio.file.Path)object1, basicFileAttributes2);
++		}
+ 	}
+ }

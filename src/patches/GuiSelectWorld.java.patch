@@ -1,6 +1,6 @@
 --- a/net/minecraft/src/GuiSelectWorld.java
 +++ b/net/minecraft/src/GuiSelectWorld.java
-@@ -6,8 +6,12 @@
+@@ -6,8 +6,13 @@
  
  public class GuiSelectWorld extends GuiScreen {
  	protected GuiScreen parentScreen;
@@ -10,10 +10,11 @@
 +	static public int worldInt = 1;
 +	static public int latest = 1;
 +	int counter = 9;
++	private GameSettings settings;
  
  	public GuiSelectWorld(GuiScreen guiScreen1) {
  		this.parentScreen = guiScreen1;
-@@ -19,12 +23,17 @@
+@@ -19,12 +24,17 @@
  		for(int i2 = 0; i2 < 5; ++i2) {
  			NBTTagCompound nBTTagCompound3 = World.getLevelData(file1, "World" + (i2 + 1));
  			if(nBTTagCompound3 == null) {
@@ -33,7 +34,15 @@
  			}
  		}
  
-@@ -50,7 +59,26 @@
+@@ -42,6 +52,7 @@
+ 	}
+ 
+ 	protected void actionPerformed(GuiButton button) {
++		this.settings = new GameSettings();
+ 		if(button.e) {
+ 			if(button.yPosition < 5) {
+ 				this.selectWorld(button.yPosition + 1);
+@@ -50,7 +61,31 @@
  			} else if(button.yPosition == 6) {
  				this.mc.displayGuiScreen(this.parentScreen);
  			}
@@ -42,26 +51,31 @@
 +
 +		if(button.yPosition == 10) {
 +			this.worldInt = 1;
++			settings.loadOptions();
 +		}
 +
 +		if(button.yPosition == 11) {
 +			this.worldInt = 2;
++			settings.loadOptions();
 +		}
 +
 +		if(button.yPosition == 12) {
 +			this.worldInt = 3;
++			settings.loadOptions();
 +		}
 +
 +		if(button.yPosition == 13) {
 +			this.worldInt = 4;
++			settings.loadOptions();
 +		}
 +
 +		if(button.yPosition == 14) {
 +			this.worldInt = 5;
++			settings.loadOptions();
  		}
  	}
  
-@@ -58,9 +86,15 @@
+@@ -58,9 +93,15 @@
  		this.mc.displayGuiScreen((GuiScreen)null);
  		if(!this.selected) {
  			this.selected = true;

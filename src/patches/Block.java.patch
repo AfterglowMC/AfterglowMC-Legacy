@@ -1,0 +1,18 @@
+--- a/net/minecraft/src/Block.java
++++ b/net/minecraft/src/Block.java
+@@ -134,6 +134,7 @@
+ 	public static final Block imgur9F0A3un = (new Block(102, 157, Material.rock)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep);
+ 	public static final Block yeahWeHadFunWithThisAsYouCanSee = (new Block(103, 158, Material.rock)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep);
+ 	public static final Block BarrierBlock = (new BlockHidable(104, 159, Material.glass, false)).setHardness(0.3F).setStepSound(soundGlassFootstep);
++	public static final Block PurpleDev = (new Block(122, 160, Material.rock)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep);
+ 	public static final Block StairLadderBlock = (new BlockLadder(105, 161)).setHardness(0.4F).setStepSound(soundWoodFootstep);
+ 	public static final Block fakeDirt = (new Block(106, 162, Material.rock)).setHardness(0.6F).setResistance(10.0F).setStepSound(soundGrassFootstep);
+ 	public static final Block fakeRock = (new Block(107, 163, Material.rock)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep);
+@@ -150,6 +151,7 @@
+ 	public static final Block glowingFlowerInfObsidian = (new BlockGlowingFlowerInfused(119, 175, 1, 7)).setHardness(0.0F).setLightValue(0.9375F).setStepSound(soundGrassFootstep);
+ 	public static final Block blueFireIdk = (new BlockGlowing(116, 172, 2)).setHardness(0.0F).setLightValue(0.9375F).setStepSound(soundStoneFootstep);
+ 	public static final Block safe = (new BlockSafe(120, 177, 176, 177)).setHardness(1.5F).setResistance(10.0F).setStepSound(soundStoneFootstep);
++	//public static final Block ashInfuser = (new Block(121, 179, Material.rock)).setHardness(0.6F).setStepSound(soundStoneFootstep);
+ 
+ 	protected Block(int id, Material material) {
+ 		this.stepSound = soundPowderFootstep;

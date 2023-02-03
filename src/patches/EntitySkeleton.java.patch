@@ -1,0 +1,11 @@
+--- a/net/minecraft/src/EntitySkeleton.java
++++ b/net/minecraft/src/EntitySkeleton.java
+@@ -41,7 +41,7 @@
+ 				this.worldObj.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / (this.rand.nextFloat() * 0.4F + 0.8F));
+ 				this.worldObj.spawnEntityInWorld(entityArrow7);
+ 				entityArrow7.setArrowHeading(d3, d8 + (double)f10, d5, 0.6F, 12.0F);
+-				this.attackTime = 30;
++				this.attackTime = 40;
+ 			}
+ 
+ 			this.rotationYaw = (float)(Math.atan2(d5, d3) * 180.0D / (double)(float)Math.PI) - 90.0F;

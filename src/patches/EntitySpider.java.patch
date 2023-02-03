@@ -1,0 +1,11 @@
+--- a/net/minecraft/src/EntitySpider.java
++++ b/net/minecraft/src/EntitySpider.java
+@@ -5,7 +5,7 @@
+ 		super(world1);
+ 		this.texture = "/mob/spider.png";
+ 		this.setSize(1.4F, 0.9F);
+-		this.moveSpeed = 0.8F;
++		this.moveSpeed = 1F;
+ 	}
+ 
+ 	public double getMountedYOffset() {

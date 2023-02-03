@@ -1,6 +1,6 @@
 --- a/net/minecraft/src/InputHandler.java
 +++ b/net/minecraft/src/InputHandler.java
-@@ -32,7 +32,7 @@
+@@ -32,11 +32,13 @@
  	private static float lastRotX;
  	private static float lastRotZ;
  	public static int lookSens = 5;
@@ -9,3 +9,18 @@
  	public static int KBEventKey = -1;
  	public static boolean KBEventKeyState = false;
  	public static boolean LastAPress = false;
+ 
++	static private GameSettings settings;
++
+ 	public static void UpdateAxis3() {
+ 		if(activeGamepad != null && axis4isMinusOne && (double)activeGamepad.getAxisValue(4) != -1.0D) {
+ 			axis4isMinusOne = false;
+@@ -156,7 +158,7 @@
+ 		if(mc.thePlayer != null && mc.thePlayer.dashTimer == 0) {
+ 			mc.theWorld.playSoundEffect(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, "ext.dash", 0.6F, 1.0F);
+ 			mc.thePlayer.dashTimer = 30;
+-			mc.thePlayer.motionX *= 10.0D;
++			mc.thePlayer.motionX *= 12.0D;
+ 			mc.thePlayer.motionY *= 3.0D;
+ 			mc.thePlayer.motionZ *= 10.0D;
+ 		}

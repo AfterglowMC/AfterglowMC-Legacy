@@ -1,6 +1,6 @@
 --- a/net/minecraft/src/CraftingManager.java
 +++ b/net/minecraft/src/CraftingManager.java
-@@ -75,6 +75,27 @@
+@@ -75,6 +75,31 @@
  		this.addRecipe(new ItemStack(Block.woolGreen), new Object[]{"#X", '#', Block.cloth, 'X', Item.greenDye});
  		this.addRecipe(new ItemStack(Block.woolBlack), new Object[]{"#X", '#', Block.cloth, 'X', Item.blackDye});
  		this.addRecipe(new ItemStack(Item.edibleFire), new Object[]{"#", '#', Block.blueFireIdk});
@@ -12,9 +12,11 @@
 +		this.addRecipe(new ItemStack(Block.safe), new Object[]{"#X#", "X$X", "#X#", '#', Block.bedrock, 'X', Block.yeahWeHadFunWithThisAsYouCanSee, '$', Block.obsidian});
 +		this.addRecipe(new ItemStack(Block.safe), new Object[]{"#X#", "X$X", "#X#", '#', Block.bedrock, 'X', Block.imgur9F0A3un, '$', Block.obsidian});
 +		this.addRecipe(new ItemStack(Block.safe), new Object[]{"#X#", "X$X", "#X#", '#', Block.bedrock, 'X', Block.AltMojangHypostasisAnemo, '$', Block.obsidian});
++		this.addRecipe(new ItemStack(Block.safe), new Object[]{"#X#", "X$X", "#X#", '#', Block.bedrock, 'X', Block.PurpleDev, '$', Block.obsidian});
 +		this.addRecipe(new ItemStack(Block.yeahWeHadFunWithThisAsYouCanSee, 4), new Object[]{"###", "#X#", "###", '#', Block.fakeRock, 'X', Item.greenDye});
 +		this.addRecipe(new ItemStack(Block.imgur9F0A3un, 4), new Object[]{"###", "#X#", "###", '#', Block.fakeRock, 'X', Item.blackDye});
 +		this.addRecipe(new ItemStack(Block.AltMojangHypostasisAnemo, 4), new Object[]{"###", "#X#", "###", '#', Block.fakeRock, 'X', Item.blueDye});
++		this.addRecipe(new ItemStack(Block.PurpleDev, 4), new Object[]{"###", "#X#", "###", '#', Block.fakeRock, 'X', Item.pinkDye});
 +		this.addRecipe(new ItemStack(Block.fakeRock, 8), new Object[]{"###", "###", "###", '#', Block.cobblestone});
 +		this.addRecipe(new ItemStack(Block.fakeDirt, 8), new Object[]{"###", "###", "###", '#', Block.dirt});
 +		this.addRecipe(new ItemStack(Block.fakeSand, 8), new Object[]{"###", "###", "###", '#', Block.sand});
@@ -24,7 +26,9 @@
 +		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.imgur9F0A3un});
 +		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.AltMojangHypostasisAnemo});
 +		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.yeahWeHadFunWithThisAsYouCanSee});
++		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.PurpleDev});
 +		this.addRecipe(new ItemStack(Block.TileBlock2NonFucked, 4), new Object[]{"# #", " # ", "# #", '#', Block.glass});
++		//this.addRecipe(new ItemStack(Item.fauxDiv), new Object[]{"#X", '#', Item.faux1, 'X', Item.faux2});
  		Collections.sort(this.recipes, new RecipeSorter(this));
  		System.out.println(this.recipes.size() + " recipes");
  	}

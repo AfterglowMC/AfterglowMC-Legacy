@@ -1,0 +1,14 @@
+--- a/net/minecraft/src/Item.java
++++ b/net/minecraft/src/Item.java
+@@ -97,6 +97,11 @@
+ 	public static Item compass = (new Item(89)).setIconIndex(54);
+ 	public static Item fishingRod = (new ItemRecord(2000, "hidden_den")).setIconIndex(240);
+ 	public static Item record13 = (new ItemRecord(2001, "lemuria")).setIconIndex(241);
++	//public static Item suoma = (new ItemRecord(2002, "suomalainen_kehtolaulu")).setIconIndex(242);
++	//public static Item bts = (new ItemRecord(2003, "before_the_storm")).setIconIndex(243); //this isnt bts its before the storm you fucking idiot
++	//public static Item fauxDiv = (new ItemRecord(2006, "faux_divinity")).setIconIndex(244);
++	//public static Item faux1 = (new Item(2004)).setIconIndex(245);
++	//public static Item faux2 = (new Item(2005)).setIconIndex(246);
+ 	public final int aR;
+ 	protected int shiftedIndex = 64;
+ 	protected int maxStackSize = 32;

@@ -1,0 +1,11 @@
+--- a/net/minecraft/src/EntityZombie.java
++++ b/net/minecraft/src/EntityZombie.java
+@@ -4,7 +4,7 @@
+ 	public EntityZombie(World world1) {
+ 		super(world1);
+ 		this.texture = "/mob/zombie.png";
+-		this.moveSpeed = 0.5F;
++		this.moveSpeed = 1F;
+ 		this.attackStrength = 5;
+ 	}
+ 
