@@ -31,10 +31,9 @@ public class GuiCredits extends GuiScreen {
 
 	public void drawScreen(int mouseX, int mouseY, float renderPartialTick) {
 		this.drawDefaultBackground();
-		this.drawCenteredString(this.fontRenderer, "Developer - liminal", this.width / 2, this.height / 4 - -(5),
-				0xFFFFFF);
-		this.drawCenteredString(this.fontRenderer, "Loading pixel art - mariood", this.width / 2,
-				this.height / 4 - -(20), 0xFFFFFF);
+		this.drawCenteredString(this.fontRenderer, "Developer - liminal", this.width / 2, this.height / 4 - -(5), 0xFFFFFF);
+		this.drawCenteredString(this.fontRenderer, "Loading pixel art - mariood", this.width / 2, this.height / 4 - -(20), 0xFFFFFF);
+		this.drawCenteredString(this.fontRenderer, "Fixed Audio - buj itself", this.width / 2, this.height / 4 - -(35), 0xFFFFFF);
 		this.drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 20, 0xFFFFFF);
 		super.drawScreen(mouseX, mouseY, renderPartialTick);
 	}
