@@ -1,0 +1,5 @@
+--- /dev/null
++++ b/net/minecraft/src/desktop.ini
+@@ -1,0 +1,2 @@
++[LocalizedFileNames]
++GuiSlider.java=@GuiSlider.java,0

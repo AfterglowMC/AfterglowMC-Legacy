@@ -1,0 +1,77 @@
+--- a/net/minecraft/src/GuiSlider.java
++++ /dev/null
+@@ -1,74 +1,0 @@
+-package net.minecraft.src;
+-
+-import java.awt.Component;
+-import java.nio.IntBuffer;
+-
+-import org.lwjgl.LWJGLException;
+-import org.lwjgl.input.Cursor;
+-import org.lwjgl.input.Mouse;
+-
+-public class GuiSlider {
+-	private Component c;
+-	private Cursor d;
+-	public int a;
+-	public int b;
+-	private int e = 10;
+-	private long lastUpdate = -1L;
+-
+-	public GuiSlider(Component component1) {
+-		this.c = component1;
+-		IntBuffer intBuffer2 = GLAllocation.createDirectIntBuffer(1);
+-		intBuffer2.put(0);
+-		intBuffer2.flip();
+-		IntBuffer intBuffer3 = GLAllocation.createDirectIntBuffer(1024);
+-
+-		try {
+-			this.d = new Cursor(32, 32, 16, 16, 1, intBuffer3, intBuffer2);
+-		} catch (LWJGLException lWJGLException5) {
+-			lWJGLException5.printStackTrace();
+-		}
+-
+-	}
+-
+-	public void a() {
+-		Mouse.setGrabbed(true);
+-		this.a = 0;
+-		this.b = 0;
+-	}
+-
+-	public void b() {
+-		Mouse.setCursorPosition(this.c.getWidth() / 2, this.c.getHeight() / 2);
+-		Mouse.setGrabbed(false);
+-	}
+-
+-	public void c() {
+-		if(this.lastUpdate == -1L) {
+-			this.lastUpdate = System.currentTimeMillis();
+-		}
+-
+-		float f1 = (float)(System.currentTimeMillis() - this.lastUpdate) / 1000.0F;
+-		this.lastUpdate = System.currentTimeMillis();
+-		if(InputHandler.gamepads != null) {
+-			for(int i2 = 0; i2 != InputHandler.gamepads.length; ++i2) {
+-				if(InputHandler.gamepads[i2] != null && (InputHandler.gamepads[i2].getRXAxisValue() != 0.0F || InputHandler.gamepads[i2].getRYAxisValue() != 0.0F) && (InputHandler.gamepads[i2].getRXAxisValue() != -1.0F || InputHandler.gamepads[i2].getRYAxisValue() != -1.0F)) {
+-					this.a = (int)(InputHandler.gamepads[i2].getRXAxisValue() * 500.0F * (float)InputHandler.lookSens * f1);
+-					if(this.a > -1 && this.a < 1) {
+-						this.a = 0;
+-					}
+-
+-					this.b = (int)(-InputHandler.gamepads[i2].getRYAxisValue() * 250.0F * (float)InputHandler.lookSens * f1);
+-					if(this.b > -1 && this.b < 1) {
+-						this.b = 0;
+-					}
+-
+-					if(this.a != 0 || this.b != 0) {
+-						return;
+-					}
+-				}
+-			}
+-		}
+-
+-		this.a = Mouse.getDX();
+-		this.b = Mouse.getDY();
+-	}
+-}

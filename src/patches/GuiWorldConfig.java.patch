@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/net/minecraft/src/GuiWorldConfig.java
-@@ -1,0 +1,53 @@
+@@ -1,0 +1,54 @@
 +package net.minecraft.src;
 +
 +import org.lwjgl.opengl.GL11;
@@ -17,6 +17,7 @@
 +public class GuiWorldConfig extends GuiScreen {
 +	protected GuiScreen parentScreen;
 +	public boolean a = true;
++	private String i = "";
 +	protected String screenTitle = "World Configuration";
 +	private boolean selected = false;
 +

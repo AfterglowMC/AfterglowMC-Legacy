@@ -17,8 +17,9 @@
 +	String[] logoBlockLayers = new String[]{" *** *** *** *** *** *** *   *** *   * ", " * * *    *  *   * * *   *   * * *   * ", " *** **   *  **  **  * * *   * * * * * ", " * * *    *  *   * * * * *   * * ** ** ", " * * *    *  *** * * *** *** *** *   * "};
  	private LogoEffectRandomizer[][] logoEffects;
  	private float updateCounter = 0.0F;
- 	private String splashString = "missingno";
+-	private String splashString = "missingno";
 -	private String[] splashes = new String[]{"MINECRAFT DEMO", "(Stay tuned for more)"};
++	private String splashString = " ";
  	public static boolean shw = false;
 +	public int worldInt = net.minecraft.src.GuiSelectWorld.worldInt;
 +	public int latest = net.minecraft.src.GuiSelectWorld.latest;
@@ -57,27 +58,30 @@
  		Calendar calendar1 = Calendar.getInstance();
  		calendar1.setTime(new Date());
  		if(calendar1.get(2) + 1 == 11 && calendar1.get(5) == 9) {
-@@ -53,9 +73,13 @@
+@@ -53,9 +73,12 @@
  		}
  
  		this.controlList.clear();
 -		this.controlList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 48, "Singleplayer"));
 -		this.controlList.add(new GuiButton(2, this.width / 2 - 100, this.height / 4 + 72, "Multiplayer"));
 -		this.controlList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120 + 12, "Options..."));
-+		this.controlList.add(new GuiSmallButton2(1, this.width / 2 - 100, this.height / 4 + 48, "Singleplayer"));
-+		this.controlList.add(new GuiSmallButton2(6, this.width / 2 - 0, this.height / 4 + 48, "Preloads"));
++		this.controlList.add(new GuiSmallButton(1, this.width / 2 - 100, this.height / 4 + 48, "Singleplayer"));
++		this.controlList.add(new GuiSmallerButton(6, this.width / 2 - (-50), this.height / 4 + 48, "Preloads"));
 +		this.controlList.add(new GuiSmallButton2(3, this.width / 2 - 100, this.height / 4 + 72, "Quickplay " + "<" + settings.worldInt + ">"));
 +		this.controlList.add(new GuiSmallButton2(4, this.width / 2 - 0, this.height / 4 + 72, "Load Last " + "<" + latest + ">"));
-+		this.controlList.add(new GuiButton(2, this.width / 2 - 100, this.height / 4 + 98, "Multiplayer"));
-+		this.controlList.add(new GuiSmallButton2(0, this.width / 2 - 100, this.height / 4 + 120 + 12, "Options"));
-+		this.controlList.add(new GuiSmallButton2(5, this.width / 2 - 0, this.height / 4 + 120 + 12, "Credits"));
++		this.controlList.add(new GuiButton(2, this.width / 2 - 100, this.height / 4 + 98, "Credits"));
++		this.controlList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120 + 12, "Options"));
  		if(this.mc.session == null) {
  			((GuiButton)this.controlList.get(1)).e = false;
  		}
-@@ -75,6 +99,26 @@
- 			this.mc.displayGuiScreen(new GuiMultiplayer(this));
+@@ -72,7 +95,23 @@
  		}
  
+ 		if(button.yPosition == 2) {
+-			this.mc.displayGuiScreen(new GuiMultiplayer(this));
++			this.mc.displayGuiScreen(new GuiCredits(this));
++		}
++
 +		if(button.yPosition == 3) {
 +			this.mc.playerController = new PlayerControllerSP(this.mc);
 +			this.mc.startWorld("World" + settings.worldInt);
@@ -90,18 +94,12 @@
 +			this.mc.displayGuiScreen((GuiScreen)null);
 +		}
 +
-+		if(button.yPosition == 5) {
-+			this.mc.displayGuiScreen(new GuiCredits(this));
-+		}
-+
 +		if(button.yPosition == 6) {
 +			this.mc.displayGuiScreen(new GuiPreloads(this));
-+		}
-+
- 	}
+ 		}
  
- 	public void drawScreen(int mouseX, int mouseY, float renderPartialTick) {
-@@ -87,7 +131,7 @@
+ 	}
+@@ -87,7 +126,7 @@
  		GL11.glPushMatrix();
  		GL11.glTranslatef((float)(this.width / 2 + 90), 70.0F, 0.0F);
  		GL11.glRotatef(-20.0F, 0.0F, 0.0F, 1.0F);
@@ -110,7 +108,7 @@
  		GL11.glScalef(f5, f5, f5);
  		this.drawCenteredString(this.fontRenderer, this.splashString, 0, -8, 16776960);
  		GL11.glPopMatrix();
-@@ -156,7 +200,7 @@
+@@ -156,7 +195,7 @@
  
  			GL11.glScalef(1.0F, -1.0F, 1.0F);
  			GL11.glRotatef(15.0F, 1.0F, 0.0F, 0.0F);
@@ -119,7 +117,7 @@
  			GL11.glTranslatef((float)(-this.logoBlockLayers[0].length()) * 0.5F, (float)(-this.logoBlockLayers.length) * 0.5F, 0.0F);
  			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/terrain.png"));
  			if(i3 == 0) {
-@@ -182,7 +226,7 @@
+@@ -182,7 +221,7 @@
  						GL11.glTranslatef((float)i6, (float)i5, f8);
  						GL11.glScalef(f9, f9, f9);
  						GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);

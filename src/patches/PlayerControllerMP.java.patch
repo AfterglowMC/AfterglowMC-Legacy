@@ -1,0 +1,46 @@
+--- a/net/minecraft/src/PlayerControllerMP.java
++++ /dev/null
+@@ -1,43 +1,0 @@
+-package net.minecraft.src;
+-
+-class PlayerControllerMP extends Thread {
+-	final NetworkManager a;
+-
+-	PlayerControllerMP(NetworkManager networkManager1, String string2) {
+-		super(string2);
+-		this.a = networkManager1;
+-	}
+-
+-	public void run() {
+-		Object object1 = NetworkManager.threadSyncObject;
+-		synchronized(NetworkManager.threadSyncObject) {
+-			++NetworkManager.numWriteThreads;
+-		}
+-
+-		while(true) {
+-			boolean z11 = false;
+-
+-			try {
+-				z11 = true;
+-				if(!NetworkManager.isRunning(this.a)) {
+-					z11 = false;
+-					break;
+-				}
+-
+-				NetworkManager.sendNetworkPacket(this.a);
+-			} finally {
+-				if(z11) {
+-					Object object5 = NetworkManager.threadSyncObject;
+-					synchronized(NetworkManager.threadSyncObject) {
+-						--NetworkManager.numWriteThreads;
+-					}
+-				}
+-			}
+-		}
+-
+-		object1 = NetworkManager.threadSyncObject;
+-		synchronized(NetworkManager.threadSyncObject) {
+-			--NetworkManager.numWriteThreads;
+-		}
+-	}
+-}
