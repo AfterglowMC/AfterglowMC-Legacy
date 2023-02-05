@@ -28,7 +28,7 @@
 +		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.yeahWeHadFunWithThisAsYouCanSee});
 +		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.PurpleDev});
 +		this.addRecipe(new ItemStack(Block.TileBlock2NonFucked, 4), new Object[]{"# #", " # ", "# #", '#', Block.glass});
-+		//this.addRecipe(new ItemStack(Item.fauxDiv), new Object[]{"#X", '#', Item.faux1, 'X', Item.faux2});
++		//this.addRecipe(new ItemStack(Block.cuttingLathe), new Object[]{"#X#", "###", "###", '#', Block.cobblestone, 'X', Item.ingotIron});
  		Collections.sort(this.recipes, new RecipeSorter(this));
  		System.out.println(this.recipes.size() + " recipes");
  	}

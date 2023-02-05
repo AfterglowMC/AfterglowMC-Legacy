@@ -1,6 +1,6 @@
 --- a/net/minecraft/src/GuiSelectWorld.java
 +++ b/net/minecraft/src/GuiSelectWorld.java
-@@ -6,8 +6,13 @@
+@@ -6,8 +6,14 @@
  
  public class GuiSelectWorld extends GuiScreen {
  	protected GuiScreen parentScreen;
@@ -9,73 +9,114 @@
  	private boolean selected = false;
 +	static public int worldInt = 1;
 +	static public int latest = 1;
-+	int counter = 9;
++	int counter = 1001;
++	public int scroll = 15;
 +	private GameSettings settings;
  
  	public GuiSelectWorld(GuiScreen guiScreen1) {
  		this.parentScreen = guiScreen1;
-@@ -19,12 +24,17 @@
- 		for(int i2 = 0; i2 < 5; ++i2) {
+@@ -16,15 +22,20 @@
+ 	public void initGui() {
+ 		File file1 = Minecraft.getMinecraftDir();
+ 
+-		for(int i2 = 0; i2 < 5; ++i2) {
++		for(int i2 = 0; i2 < 10; ++i2) {
  			NBTTagCompound nBTTagCompound3 = World.getLevelData(file1, "World" + (i2 + 1));
  			if(nBTTagCompound3 == null) {
 -				this.controlList.add(new GuiButton(i2, this.width / 2 - 100, this.height / 6 + 24 * i2, "- empty -"));
-+				this.controlList.add(new GuiButton(i2, this.width / 2 - 115, this.height / 6 + 24 * i2, "- empty -"));
++				this.controlList.add(new GuiButton(i2, this.width / 2 - 120, this.height / scroll + 22 * i2, "- empty -"));
 +				++counter;
-+				this.controlList.add(new GuiSmallestButton(counter, this.width / 2 -(-90), this.height / 6 + 24 * i2, "Set"));
++				this.controlList.add(new GuiSmallestButton(counter, this.width / 2 - (-80), this.height / scroll + 22 * i2, "Set"));
  			} else {
  				String string4 = "World " + (i2 + 1);
  				long j5 = nBTTagCompound3.getLong("SizeOnDisk");
  				string4 = string4 + " (" + (float)(j5 / 1024L * 100L / 1024L) / 100.0F + " MB)";
 -				this.controlList.add(new GuiButton(i2, this.width / 2 - 100, this.height / 6 + 24 * i2, string4));
-+				this.controlList.add(new GuiButton(i2, this.width / 2 - 115, this.height / 6 + 24 * i2, string4));
++				this.controlList.add(new GuiButton(i2, this.width / 2 - 120, this.height / scroll + 22 * i2, string4));
 +				++counter;
-+				this.controlList.add(new GuiSmallestButton(counter, this.width / 2 -(-90), this.height / 6 + 24 * i2, "Set"));
++				this.controlList.add(new GuiSmallestButton(counter, this.width / 2 - (-80), this.height / scroll + 22 * i2, "Set"));
 +
  			}
  		}
  
-@@ -42,6 +52,7 @@
+@@ -37,20 +48,70 @@
+ 	}
+ 
+ 	public void initButtons() {
+-		this.controlList.add(new GuiButton(5, this.width / 2 - 100, this.height / 6 + 120 + 12, "Delete world..."));
+-		this.controlList.add(new GuiButton(6, this.width / 2 - 100, this.height / 6 + 168, "Cancel"));
++		this.controlList.add(new GuiSmallerButton(1000, this.width / 2 - (-110), this.height / 6 + (-25), "Delete"));
++		this.controlList.add(new GuiSmallerButton(1001, this.width / 2 - 175, this.height / 6 + (-25), "Cancel"));
  	}
  
  	protected void actionPerformed(GuiButton button) {
 +		this.settings = new GameSettings();
  		if(button.e) {
- 			if(button.yPosition < 5) {
+-			if(button.yPosition < 5) {
++			if(button.yPosition < 1000) {
  				this.selectWorld(button.yPosition + 1);
-@@ -50,7 +61,31 @@
- 			} else if(button.yPosition == 6) {
+-			} else if(button.yPosition == 5) {
++			} else if(button.yPosition == 1000) {
+ 				this.mc.displayGuiScreen(new GuiDeleteWorld(this));
+-			} else if(button.yPosition == 6) {
++			} else if(button.yPosition == 1001) {
  				this.mc.displayGuiScreen(this.parentScreen);
  			}
 -
 +		}
 +
-+		if(button.yPosition == 10) {
++		if(button.yPosition == 1002) {
 +			this.worldInt = 1;
 +			settings.loadOptions();
 +		}
 +
-+		if(button.yPosition == 11) {
++		if(button.yPosition == 1003) {
 +			this.worldInt = 2;
 +			settings.loadOptions();
 +		}
 +
-+		if(button.yPosition == 12) {
++		if(button.yPosition == 1004) {
 +			this.worldInt = 3;
 +			settings.loadOptions();
 +		}
 +
-+		if(button.yPosition == 13) {
++		if(button.yPosition == 1005) {
 +			this.worldInt = 4;
 +			settings.loadOptions();
 +		}
 +
-+		if(button.yPosition == 14) {
++		if(button.yPosition == 1006) {
 +			this.worldInt = 5;
++			settings.loadOptions();
++		}
++
++		if(button.yPosition == 1007) {
++			this.worldInt = 6;
++			settings.loadOptions();
++		}
++
++		if(button.yPosition == 1008) {
++			this.worldInt = 7;
++			settings.loadOptions();
++		}
++
++		if(button.yPosition == 1009) {
++			this.worldInt = 8;
++			settings.loadOptions();
++		}
++
++		if(button.yPosition == 1010) {
++			this.worldInt = 9;
++			settings.loadOptions();
++		}
++
++		if(button.yPosition == 1011) {
++			this.worldInt = 10;
 +			settings.loadOptions();
  		}
  	}
  
-@@ -58,9 +93,15 @@
+@@ -58,9 +119,15 @@
  		this.mc.displayGuiScreen((GuiScreen)null);
  		if(!this.selected) {
  			this.selected = true;

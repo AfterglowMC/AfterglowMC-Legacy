@@ -1,0 +1,12 @@
+--- a/net/minecraft/src/EntityOtherPlayerMP.java
++++ /dev/null
+@@ -1,9 +1,0 @@
+-package net.minecraft.src;
+-
+-public interface EntityOtherPlayerMP {
+-	void b(String string1);
+-
+-	void d(String string1);
+-
+-	void a(int i1);
+-}
