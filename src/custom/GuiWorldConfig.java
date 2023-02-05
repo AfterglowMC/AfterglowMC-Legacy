@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 public class GuiWorldConfig extends GuiScreen {
 	protected GuiScreen parentScreen;
 	public boolean a = true;
+	private String i = "";
 	protected String screenTitle = "World Configuration";
 	private boolean selected = false;
 

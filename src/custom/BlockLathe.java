@@ -1,0 +1,13 @@
+package net.minecraft.src;
+
+public class BlockLathe extends BlockMultiSided {
+	protected BlockLathe(int i1, int i2, int i3, int i4) {
+		super(i1, i2, i3, i4);
+	}
+
+	public boolean blockActivated(World worldObj, int x, int y, int z, EntityPlayer entityPlayer) {
+		//entityPlayer.displayWorkbenchGUI();
+
+		return true;
+	}
+}
