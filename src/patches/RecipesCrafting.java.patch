@@ -1,0 +1,9 @@
+--- a/net/minecraft/src/RecipesCrafting.java
++++ b/net/minecraft/src/RecipesCrafting.java
+@@ -5,5 +5,6 @@
+ 		craftingManager.addRecipe(new ItemStack(Block.chest), new Object[]{"###", "# #", "###", '#', Block.planks});
+ 		craftingManager.addRecipe(new ItemStack(Block.stoneOvenIdle), new Object[]{"###", "# #", "###", '#', Block.cobblestone});
+ 		craftingManager.addRecipe(new ItemStack(Block.workbench), new Object[]{"##", "##", '#', Block.planks});
++		craftingManager.addRecipe(new ItemStack(Block.workbench), new Object[]{"##", "##", '#', Block.gemPlanks});
+ 	}
+ }
