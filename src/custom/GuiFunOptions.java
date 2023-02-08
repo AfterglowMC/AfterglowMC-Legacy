@@ -1,0 +1,48 @@
+package net.minecraft.src;
+
+public class GuiFunOptions extends GuiScreen {
+	private GuiScreen parentScreen;
+	protected String screenTitle = "Fun Settings";
+	private GameSettings options;
+	public int u = 1;
+	public static boolean australia = false;
+
+	public GuiFunOptions(GuiScreen guiScreen1, GameSettings gameSettings2) {
+		this.parentScreen = guiScreen1;
+		this.options = gameSettings2;
+	}
+
+	public String j(int setting) {
+		return setting == 0 ? "Australia Mode" : "";
+	}
+
+	public void initGui() {
+		for(int i1 = 0; i1 < this.u; ++i1) {
+			this.controlList.add(new GuiSmallButton(i1, this.width / 2 - 155 + i1 % 2 * 160, this.height / 6 + 24 * (i1 >> 1), this.j(i1)));
+		}
+
+		this.controlList.add(new GuiSmallerButton(200, this.width / 2 - 155, this.height / 6 + (-25), "Done"));
+	}
+
+	protected void actionPerformed(GuiButton button) {
+		if(button.yPosition == 0) {
+			if (this.australia == false) {
+				this.australia = true;
+			} else if (this.australia == true) {
+				this.australia = false;
+			}
+			
+			System.out.println(this.australia);
+		}
+
+		if(button.yPosition == 200) {
+			this.mc.displayGuiScreen(this.parentScreen);
+		}
+	}
+
+	public void drawScreen(int mouseX, int mouseY, float renderPartialTick) {
+		this.drawOptionBackground();
+		this.drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 20, 0xFFFFFF);
+		super.drawScreen(mouseX, mouseY, renderPartialTick);
+	}
+}
