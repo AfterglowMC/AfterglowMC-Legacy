@@ -41,24 +41,7 @@
  		Files.walkFileTree(path1, simpleFileVisitor2);
  	}
  
-@@ -105,6 +75,16 @@
- 				bufferedReader4 = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/wstatic_data.txt")));
- 				this.UnpackReader(bufferedReader4);
- 			}
-+			System.out.println(System.getProperty("user.dir") + "/saves/Hub/");
-+			if(!(new File(System.getProperty("user.dir") + "/saves/Hub/")).exists()) {
-+				bufferedReader4 = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/wstatic_data.txt")));
-+				this.UnpackReader(bufferedReader4);
-+			}
-+			System.out.println(System.getProperty("user.dir") + "/saves/SecretWorld/");
-+			if(!(new File(System.getProperty("user.dir") + "/saves/SecretWorld/")).exists()) {
-+				bufferedReader4 = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/wstatic_data.txt")));
-+				this.UnpackReader(bufferedReader4);
-+			}
- 
- 			this.loadResource(this.resourcesFolder, "");
- 		} catch (Exception exception6) {
-@@ -169,5 +149,38 @@
+@@ -169,5 +139,38 @@
  	}
  
  	private void downloadResource(URL url, File file, long size) throws IOException {

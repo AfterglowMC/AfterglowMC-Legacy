@@ -1,6 +1,10 @@
 --- a/net/minecraft/src/GameSettings.java
 +++ b/net/minecraft/src/GameSettings.java
-@@ -16,8 +16,11 @@
+@@ -13,28 +13,35 @@
+ public class GameSettings {
+ 	private static final String[] x = new String[]{"FAR", "NORMAL", "SHORT", "TINY"};
+ 	private static final String[] RENDER_DISTANCES = new String[]{"Peaceful", "Easy", "Normal", "Hard", "Frail"};
++	private static final String[] FOV = new String[]{"70", "80", "90", "100"};
  	public boolean a = true;
  	public boolean b = true;
  	public boolean c = false;
@@ -8,11 +12,16 @@
 +	public static boolean k = false;
  	public boolean invertMouse = false;
  	public int renderDistance = 0;
++	public static int fovAmount = 0;
++	public static float fovNumber = 70.0F;
 +	static public int worldInt = net.minecraft.src.GuiSelectWorld.worldInt;
  	public boolean viewBobbing = true;
  	public boolean anaglyph = false;
  	public boolean limitFramerate = false;
-@@ -27,14 +30,14 @@
+ 	public boolean fancyGraphics = true;
++	public boolean australia = false;
+ 	public KeyBinding keyBindForward = new KeyBinding("Forward", Keyboard.KEY_W);
+ 	public KeyBinding keyBindLeft = new KeyBinding("Left", Keyboard.KEY_A);
  	public KeyBinding keyBindBack = new KeyBinding("Back", Keyboard.KEY_S);
  	public KeyBinding keyBindRight = new KeyBinding("Right", Keyboard.KEY_D);
  	public KeyBinding keyBindJump = new KeyBinding("Jump", Keyboard.KEY_SPACE);
@@ -25,16 +34,94 @@
  	protected Minecraft t;
  	private File z;
 -	public int u = 10;
-+	public int u = 11;
++	public int u = 12;
  	public int numberOfOptions = 2;
  	public boolean w = false;
  
-@@ -101,14 +104,19 @@
+@@ -57,6 +64,14 @@
+ 	}
+ 
+ 	public void setOptionValue(int i1, int i2) {
++		//fun settings
++
++		if(i1 == 1000) {
++			this.australia = !this.australia;
++		}
++
++		//normal settings
++
+ 		if(i1 == 0) {
+ 			this.a = !this.a;
+ 			this.t.A.a();
+@@ -67,48 +82,70 @@
+ 			this.t.A.a();
+ 		}
+ 
+-		if(i1 == 2) {
+-			this.c = !this.c;
+-		}
+-
+ 		if(i1 == 3) {
+-			this.invertMouse = !this.invertMouse;
++			this.c = !this.c;
+ 		}
+ 
+ 		if(i1 == 4) {
+-			this.renderDistance = this.renderDistance + i2 & 3;
++			this.invertMouse = !this.invertMouse;
+ 		}
+ 
+ 		if(i1 == 5) {
+-			this.viewBobbing = !this.viewBobbing;
++			this.renderDistance = this.renderDistance + i2 & 3;
+ 		}
+ 
+ 		if(i1 == 6) {
++			this.viewBobbing = !this.viewBobbing;
++		}
++
++		if(i1 == 7) {
+ 			this.anaglyph = !this.anaglyph;
+ 			this.t.renderEngine.refreshTextures();
+ 		}
+ 
+-		if(i1 == 7) {
+-			this.limitFramerate = !this.limitFramerate;
+-		}
+-
+ 		if(i1 == 8) {
+-			this.numberOfOptions = (this.numberOfOptions + i2) % 5;
++			this.limitFramerate = !this.limitFramerate;
+ 		}
+ 
+ 		if(i1 == 9) {
++			this.numberOfOptions = (this.numberOfOptions + i2) % 5;
++		}
++
++		if(i1 == 10) {
+ 			this.fancyGraphics = !this.fancyGraphics;
  			this.t.renderGlobal.loadRenderers();
  		}
  
-+		if(i1 == 10) {
++		if(i1 == 11) {
 +			//nothing
++		}
++
++		if(i1 == 2) {
++			this.fovAmount = this.fovAmount + i2 & 3;
++			if (fovAmount == 0) {
++				this.fovNumber = 70.0F;
++				System.out.println("FOV: " + fovNumber);
++			} else if (fovAmount == 1) {
++				this.fovNumber = 80.0F;
++				System.out.println("FOV: " + fovNumber);
++			} else if (fovAmount == 2) {
++				this.fovNumber = 90.0F;
++				System.out.println("FOV: " + fovNumber);
++			} else if (fovAmount == 3) {
++				this.fovNumber = 100.0F;
++				System.out.println("FOV: " + fovNumber);
++			}
 +		}
 +
  		this.saveOptions();
@@ -42,7 +129,7 @@
  
  	public String b(int i1) {
 -		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 3 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 4 ? "Render distance: " + x[this.renderDistance] : (i1 == 5 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 6 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 7 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 8 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 9 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : "")))))))));
-+		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 3 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 4 ? "Render distance: " + x[this.renderDistance] : (i1 == 5 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 6 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 7 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 8 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 9 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : (i1 == 10 ? "Update Quickplay" + (this.k ? "" : "") : ""))))))))));
++		return i1 == 0 ? "Music: " + (this.a ? "ON" : "OFF") : (i1 == 1 ? "Sound: " + (this.b ? "ON" : "OFF") : (i1 == 2 ? "FOV: " + FOV[this.fovAmount] : (i1 == 3 ? "Invert mouse: " + (this.c ? "ON" : "OFF") : (i1 == 4 ? "Show FPS: " + (this.invertMouse ? "ON" : "OFF") : (i1 == 5 ? "Render distance: " + x[this.renderDistance] : (i1 == 6 ? "View bobbing: " + (this.viewBobbing ? "ON" : "OFF") : (i1 == 7 ? "3d anaglyph: " + (this.anaglyph ? "ON" : "OFF") : (i1 == 8 ? "Limit framerate: " + (this.limitFramerate ? "ON" : "OFF") : (i1 == 9 ? "Difficulty: " + RENDER_DISTANCES[this.numberOfOptions] : (i1 == 10 ? "Graphics: " + (this.fancyGraphics ? "FANCY" : "FAST") : (i1 == 11 ? "Update Quickplay" + (this.k ? "" : "") : "")))))))))));
  	}
  
  	public void loadOptions() {
@@ -50,7 +137,7 @@
  		try {
  			if(this.z.exists()) {
  				BufferedReader bufferedReader1 = new BufferedReader(new FileReader(this.z));
-@@ -155,6 +163,10 @@
+@@ -155,6 +192,10 @@
  						this.limitFramerate = string3[1].equals("true");
  					}
  
@@ -61,7 +148,7 @@
  					if(string3[0].equals("a1605ext_difficulty")) {
  						this.numberOfOptions = Integer.parseInt(string3[1]);
  					}
-@@ -163,6 +175,10 @@
+@@ -163,10 +204,30 @@
  						InputHandler.lookSens = Integer.parseInt(string3[1]);
  					}
  
@@ -69,10 +156,30 @@
 +						this.worldInt = Integer.parseInt(string3[1]);
 +					}
 +
++					if(string3[0].equals("fovType")) {
++						this.fovAmount = Integer.parseInt(string3[1]);
++					}
++
++					if(string3[0].equals("fovNumber")) {
++						this.fovNumber = Float.parseFloat(string3[1]);
++					}
++
  					if(string3[0].equals("fancyGraphics")) {
  						this.fancyGraphics = string3[1].equals("true");
  					}
-@@ -181,6 +197,7 @@
+ 
++					//fun settings
++					
++					if(string3[0].equals("australiaMode")) {
++						this.australia = string3[1].equals("true");
++					}
++
++					//keys
++
+ 					for(int i4 = 0; i4 < this.s.length; ++i4) {
+ 						if(string3[0].equals("key_" + this.s[i4].keyDescription)) {
+ 							this.s[i4].keyCode = Integer.parseInt(string3[1]);
+@@ -181,6 +242,7 @@
  	}
  
  	public void saveOptions() {
@@ -80,12 +187,18 @@
  		try {
  			PrintWriter printWriter1 = new PrintWriter(new FileWriter(this.z));
  			printWriter1.println("music:" + this.a);
-@@ -196,6 +213,8 @@
+@@ -196,6 +258,14 @@
  			printWriter1.println("# Settings below are specific to 1605 extension.");
  			printWriter1.println("a1605ext_difficulty:" + this.numberOfOptions);
  			printWriter1.println("a1605ext_gamepadSens:" + InputHandler.lookSens);
++			printWriter1.println("# Settings below are specific to afterglow mod.");
 +			printWriter1.println("quickplaySet:" + this.worldInt);
++			printWriter1.println("fovType:" + this.fovAmount);
++			printWriter1.println("fovNumber:" + this.fovNumber);
 +			printWriter1.println("cheats:" + this.cheats);
++			printWriter1.println("# Settings below are fun settings.");
++			printWriter1.println("australiaMode:" + this.australia);
++			printWriter1.println("# Below are the key codes.");
  
  			for(int i2 = 0; i2 < this.s.length; ++i2) {
  				printWriter1.println("key_" + this.s[i2].keyDescription + ":" + this.s[i2].keyCode);

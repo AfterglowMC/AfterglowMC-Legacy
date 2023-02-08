@@ -1,0 +1,54 @@
+--- a/net/minecraft/src/GuiEditSign.java
++++ b/net/minecraft/src/GuiEditSign.java
+@@ -186,7 +186,7 @@
+ 		int i7 = chunkZ + (z8 ? this.j.nextInt(2000) - this.j.nextInt(1000) : 0);
+ 		this.a(i6, i7, b4);
+ 		this.b(i6, i7, b4);
+-		this.u.a(this, this.p, i6, i7, b4);
++	    this.u.a(this, this.p, i6, i7, b4);
+ 		chunk5.generateSkylightMap();
+ 		return chunk5;
+ 	}
+@@ -347,7 +347,9 @@
+ 		if(this.j.nextInt(10) == 0) {
+ 			object9 = new WorldGenBigTree();
+ 		}
+-
++		if(this.j.nextInt(25) == 0) {
++			object9 = new WorldGenGemTrees();
++		}
+ 		int i10;
+ 		int i11;
+ 		int i12;
+@@ -362,6 +364,10 @@
+ 			(new WorldGenFlowers(Block.ae.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
+ 		}
+ 
++		for(i10 = 0; i10 < 64; ++i10) {
++			(new WorldGenFlowers(Block.grassFlower.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
++		}
++
+ 		if(this.j.nextInt(2) == 0) {
+ 			(new WorldGenFlowers(Block.af.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
+ 		}
+@@ -374,12 +380,20 @@
+ 			(new WorldGenFlowers(Block.ah.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
+ 		}
+ 
++		if(this.j.nextInt(8) == 0) {
++			(new WorldGenFlowers(Block.glowShroom.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
++		}
++
+ 		for(i10 = 0; i10 < 3; ++i10) {
+ 			(new PillarGen(Block.saltBlock.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
+ 		}
+ 
+ 		for(i10 = 0; i10 < 3; ++i10) {
+ 			(new OnWaterGen(Block.glowingFlower.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
++		}
++
++		for(i10 = 0; i10 < 1; ++i10) {
++			(new OnWaterGen(Block.glowingFlowerWhite.blockID)).generate(this.p, this.j, i4 + this.j.nextInt(16) + 8, this.j.nextInt(128), i5 + this.j.nextInt(16) + 8);
+ 		}
+ 
+ 		for(i10 = 0; i10 < 2; ++i10) {

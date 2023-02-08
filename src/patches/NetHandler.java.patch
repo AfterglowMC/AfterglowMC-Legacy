@@ -1,0 +1,13 @@
+--- a/net/minecraft/src/NetHandler.java
++++ b/net/minecraft/src/NetHandler.java
+@@ -4,6 +4,10 @@
+ 	public void handleMapChunk(Packet51MapChunk packet) {
+ 	}
+ 
++	public void handleAfterglowMeta(final Packet130AfterglowMeta packet) {
++		this.registerPacket(packet);
++    }
++
+ 	public void registerPacket(Packet packet) {
+ 	}
+ 

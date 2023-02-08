@@ -1,6 +1,14 @@
 --- a/net/minecraft/src/Item.java
 +++ b/net/minecraft/src/Item.java
-@@ -119,6 +119,13 @@
+@@ -32,6 +32,7 @@
+ 	public static Item stick = (new Item(24)).setIconIndex(53).setFull3D();
+ 	public static Item bowlEmpty = (new Item(25)).setIconIndex(71);
+ 	public static Item bowlSoup = (new ItemSoup(26, 10)).setIconIndex(72);
++	public static Item soupGlow = (new ItemSoup(107, 20)).setIconIndex(73);
+ 	public static Item swordGold = (new ItemSword(27, 0)).setIconIndex(68);
+ 	public static Item shovelGold = (new ItemArmor(28, 0)).setIconIndex(84);
+ 	public static Item pickaxeGold = (new ItemPickaxe(29, 0)).setIconIndex(100);
+@@ -119,6 +120,13 @@
  	public static Item fryshroom = (new BlockStep(104, 6)).setIconIndex(162);
  	public static Item edibleFire = (new BlockStep(105, 2)).setIconIndex(178);
  	public static Item flameberge = (new SwordFlameberge(106)).setIconIndex(69);

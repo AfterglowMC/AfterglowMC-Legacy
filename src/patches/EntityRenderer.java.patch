@@ -1,0 +1,32 @@
+--- a/net/minecraft/src/EntityRenderer.java
++++ b/net/minecraft/src/EntityRenderer.java
+@@ -28,6 +28,8 @@
+ 	float fogColorBlue;
+ 	private float prevFogColor;
+ 	private float fogColor;
++	public float fovAmount;
++	public boolean australia = net.minecraft.src.GuiFunOptions.australia;
+ 
+ 	public EntityRenderer(Minecraft minecraft) {
+ 		this.mc = minecraft;
+@@ -97,16 +99,16 @@
+ 
+ 	private float getFOVModifier(float renderPartialTick) {
+ 		EntityPlayerSP entityPlayerSP2 = this.mc.thePlayer;
+-		float f3 = 70.0F;
++		this.fovAmount = this.mc.options.fovNumber;
+ 		if(entityPlayerSP2.isInsideOfMaterial(Material.water)) {
+-			f3 = 60.0F;
++			this.fovAmount -= 10.0F;
+ 		}
+ 
+ 		if(entityPlayerSP2.health <= 0) {
+-			f3 /= (1.0F - 500.0F / ((float)entityPlayerSP2.deathTime + renderPartialTick + 500.0F)) * 2.0F + 1.0F;
++			this.fovAmount /= (1.0F - 500.0F / ((float)entityPlayerSP2.deathTime + renderPartialTick + 500.0F)) * 2.0F + 1.0F;
+ 		}
+ 
+-		return f3;
++		return this.fovAmount;
+ 	}
+ 
+ 	private void hurtCameraEffect(float renderPartialTick) {

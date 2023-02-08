@@ -30,7 +30,7 @@
  		try {
 -			this.splashString = this.splashes[rand.nextInt(this.splashes.length)];
 -		} catch (Exception exception2) {
-+			settings.saveOptions();
++			//settings.loadOptions();
 +			ArrayList arrayList1 = new ArrayList();
 +			BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(GuiMainMenu.class.getResourceAsStream("/title/splashes.txt")));
 +			String string3 = "";
@@ -74,7 +74,17 @@
  		if(this.mc.session == null) {
  			((GuiButton)this.controlList.get(1)).e = false;
  		}
-@@ -72,7 +95,23 @@
+@@ -64,7 +87,8 @@
+ 
+ 	protected void actionPerformed(GuiButton button) {
+ 		if(button.yPosition == 0) {
+-			this.mc.displayGuiScreen(new GuiOptions(this, this.mc.options));
++			this.mc.displayGuiScreen(new GuiOptionsMaster(this));
++			//this.mc.displayGuiScreen(new GuiOptionsMaster(this, this.mc.options));
+ 		}
+ 
+ 		if(button.yPosition == 1) {
+@@ -72,7 +96,23 @@
  		}
  
  		if(button.yPosition == 2) {
@@ -99,7 +109,7 @@
  		}
  
  	}
-@@ -87,7 +126,7 @@
+@@ -87,7 +127,7 @@
  		GL11.glPushMatrix();
  		GL11.glTranslatef((float)(this.width / 2 + 90), 70.0F, 0.0F);
  		GL11.glRotatef(-20.0F, 0.0F, 0.0F, 1.0F);
@@ -108,7 +118,7 @@
  		GL11.glScalef(f5, f5, f5);
  		this.drawCenteredString(this.fontRenderer, this.splashString, 0, -8, 16776960);
  		GL11.glPopMatrix();
-@@ -156,7 +195,7 @@
+@@ -156,7 +196,7 @@
  
  			GL11.glScalef(1.0F, -1.0F, 1.0F);
  			GL11.glRotatef(15.0F, 1.0F, 0.0F, 0.0F);
@@ -117,7 +127,7 @@
  			GL11.glTranslatef((float)(-this.logoBlockLayers[0].length()) * 0.5F, (float)(-this.logoBlockLayers.length) * 0.5F, 0.0F);
  			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/terrain.png"));
  			if(i3 == 0) {
-@@ -182,7 +221,7 @@
+@@ -182,7 +222,7 @@
  						GL11.glTranslatef((float)i6, (float)i5, f8);
  						GL11.glScalef(f9, f9, f9);
  						GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);

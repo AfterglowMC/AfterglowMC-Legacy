@@ -1,0 +1,11 @@
+--- a/net/minecraft/src/GuiIngameMenu.java
++++ b/net/minecraft/src/GuiIngameMenu.java
+@@ -18,7 +18,7 @@
+ 
+ 	protected void actionPerformed(GuiButton button) {
+ 		if(button.yPosition == 0) {
+-			this.mc.displayGuiScreen(new GuiOptions(this, this.mc.options));
++			this.mc.displayGuiScreen(new GuiOptionsMaster(this));
+ 		}
+ 
+ 		if(button.yPosition == 1) {

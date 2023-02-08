@@ -1,16 +1,53 @@
 --- a/net/minecraft/src/GuiIngame.java
 +++ b/net/minecraft/src/GuiIngame.java
-@@ -281,6 +281,9 @@
+@@ -29,6 +29,9 @@
+ 	private int lgroupY;
+ 	public String currentArea = "";
+ 	public long areaTimer = 0L;
++	public double posX;
++	public double posY;
++	public double posZ;
+ 	private static final String[] syllab = new String[]{"SIE", "LOH", "KII", "HUR", "MIS", "RUU", "VY", "KA", "TAV", "OLE", "PAH", "MUI", "MAT", "JA", "SAU", "NIN", "UD", "MU", "NGI", "BAR", "LUG", "MAH", "GIR", "AK", "USU", "ESE", "IRU", "UUN", "AMTU", "AGAS", "HI", "TOOI", "YORU", "NEN", "PON", "ONNA", "TSU", "YA", "AO", "ONI", "AN", "KO", "SHI", "YUME", "YARI", "TEST"};
+ 
+ 	public void RenderHungerBar() {
+@@ -165,7 +168,12 @@
+ 
+ 			if(this.mc.thePlayer.dashTimer != 0) {
+ 				this.drawGradientRect(i6 / 2 - 50 - 1, i7 - 90 - 1, i6 / 2 - 50 + 100 + 1, i7 - 90 + 5 + 1, -14671840, 0xFF000000);
+-				this.drawGradientRect(i6 / 2 - 50, i7 - 90, i6 / 2 - 50 + (int)(100.0F * (1.0F - (float)this.mc.thePlayer.dashTimer / 30.0F)), i7 - 90 + 5, -3584, -13893888);
++				if (this.mc.thePlayer.dashTimer < 15) {
++					this.drawGradientRect(i6 / 2 - 50, i7 - 90, i6 / 2 - 50 + (int)(100.0F * (1.0F - (float)this.mc.thePlayer.dashTimer / 30.0F)), i7 - 90 + 5, -9013521, -16120877);
++				} else {
++					this.drawGradientRect(i6 / 2 - 50, i7 - 90, i6 / 2 - 50 + (int)(100.0F * (1.0F - (float)this.mc.thePlayer.dashTimer / 30.0F)), i7 - 90 + 5, -3584, -13893888);
++				}
++				
+ 			}
+ 
+ 			if(this.mc.theWorld.bossfightInProgress) {
+@@ -258,8 +266,11 @@
+ 
+ 		GLStatics.a();
+ 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
++		this.posX = Math.round(this.mc.thePlayer.posX * 100) / 100.0;
++		this.posY = Math.round(this.mc.thePlayer.posY * 100) / 100.0;
++		this.posZ = Math.round(this.mc.thePlayer.posZ * 100) / 100.0;
+ 		if(this.mc.options.invertMouse) {
+-			fontRenderer8.drawStringWithShadow("Minecraft Alpha 1.0.16.05_13 Lilypad", 2, 2, 0xFFFFFF);
++			fontRenderer8.drawStringWithShadow("Minecraft Alpha 1.0.16.05_13 Lilypad §9After§6glow", 2, 2, 0xFFFFFF);
+ 			fontRenderer8.drawStringWithShadow(this.mc.debug, 2, 12, 0xFFFFFF);
+ 			fontRenderer8.drawStringWithShadow(this.mc.debugInfoRenders(), 2, 22, 0xFFFFFF);
+ 			fontRenderer8.drawStringWithShadow(this.mc.getEntityDebug(), 2, 32, 0xFFFFFF);
+@@ -280,7 +291,8 @@
+ 			String string36 = "Allocated memory: " + j27 * 100L / j25 + "% (" + j27 / 1024L / 1024L + "MB)";
  			this.drawString(fontRenderer8, string36, i6 - fontRenderer8.getStringWidth(string36) - 2, 12, 14737632);
  		} else {
- 			fontRenderer8.drawStringWithShadow("Minecraft Alpha 1.0.16.05_13 Lilypad", 2, 2, 0xFFFFFF);
-+			this.drawString(fontRenderer8, "x: " + this.mc.thePlayer.posX, 2, 14, 14737632);
-+			this.drawString(fontRenderer8, "y: " + this.mc.thePlayer.posY, 2, 26, 14737632);
-+			this.drawString(fontRenderer8, "z: " + this.mc.thePlayer.posZ, 2, 38, 14737632);
+-			fontRenderer8.drawStringWithShadow("Minecraft Alpha 1.0.16.05_13 Lilypad", 2, 2, 0xFFFFFF);
++			fontRenderer8.drawStringWithShadow("Minecraft Alpha 1.0.16.05_13 Lilypad §9After§6glow", 2, 2, 0xFFFFFF);
++			this.drawString(fontRenderer8, "§cx: " + this.posX + " §ay: " + this.posY + " §ez: " + this.posZ, 2, 14, 14737632);
  			if(uqKey != "") {
  				fontRenderer8.drawStringWithShadow(uqKey, 2, 12, 0xFFFFFF);
  			}
-@@ -330,19 +333,6 @@
+@@ -330,19 +342,6 @@
  		GL11.glDisable(GL11.GL_ALPHA_TEST);
  		GL11.glPushMatrix();
  		GL11.glTranslatef(0.0F, (float)(i7 - 48), 0.0F);

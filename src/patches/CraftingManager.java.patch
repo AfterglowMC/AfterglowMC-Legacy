@@ -1,6 +1,15 @@
 --- a/net/minecraft/src/CraftingManager.java
 +++ b/net/minecraft/src/CraftingManager.java
-@@ -75,6 +75,31 @@
+@@ -39,6 +39,8 @@
+ 		this.addRecipe(new ItemStack(Item.stick, 4), new Object[]{"#", "#", '#', Block.planks});
+ 		this.addRecipe(new ItemStack(Block.torch, 4), new Object[]{"X", "#", 'X', Item.coal, '#', Item.stick});
+ 		this.addRecipe(new ItemStack(Item.bowlEmpty, 4), new Object[]{"# #", " # ", '#', Block.planks});
++		this.addRecipe(new ItemStack(Item.bowlSoup, 1), new Object[]{"#X$", '#', Item.bowlEmpty, 'X', Block.ag, '$', Block.ah});
++		this.addRecipe(new ItemStack(Item.soupGlow, 1), new Object[]{"#X", '#', Item.bowlEmpty, 'X', Block.glowShroom});
+ 		this.addRecipe(new ItemStack(Block.minecartTrack, 16), new Object[]{"X X", "X#X", "X X", 'X', Item.ingotIron, '#', Item.stick});
+ 		this.addRecipe(new ItemStack(Item.minecartEmpty, 1), new Object[]{"# #", "###", '#', Item.ingotIron});
+ 		this.addRecipe(new ItemStack(Item.minecartBox, 1), new Object[]{"A", "B", 'A', Block.chest, 'B', Item.minecartEmpty});
+@@ -75,6 +77,32 @@
  		this.addRecipe(new ItemStack(Block.woolGreen), new Object[]{"#X", '#', Block.cloth, 'X', Item.greenDye});
  		this.addRecipe(new ItemStack(Block.woolBlack), new Object[]{"#X", '#', Block.cloth, 'X', Item.blackDye});
  		this.addRecipe(new ItemStack(Item.edibleFire), new Object[]{"#", '#', Block.blueFireIdk});
@@ -28,6 +37,7 @@
 +		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.yeahWeHadFunWithThisAsYouCanSee});
 +		this.addRecipe(new ItemStack(Block.TileBlock2, 4), new Object[]{"# #", " X ", "# #", '#', Block.glass, 'X', Block.PurpleDev});
 +		this.addRecipe(new ItemStack(Block.TileBlock2NonFucked, 4), new Object[]{"# #", " # ", "# #", '#', Block.glass});
++		this.addRecipe(new ItemStack(Block.gemPlanks, 4), new Object[]{"#", '#', Block.gemLog});
 +		//this.addRecipe(new ItemStack(Block.cuttingLathe), new Object[]{"#X#", "###", "###", '#', Block.cobblestone, 'X', Item.ingotIron});
  		Collections.sort(this.recipes, new RecipeSorter(this));
  		System.out.println(this.recipes.size() + " recipes");
